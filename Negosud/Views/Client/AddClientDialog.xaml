@@ -1,0 +1,26 @@
+﻿<ContentDialog
+    x:Class="Negosud.Views.Client.AddClientDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Negosud.Views.Product"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    Title="Ajouter un client"
+    PrimaryButtonText="Valider"
+    SecondaryButtonText="Annuler"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+    SecondaryButtonClick="ContentDialog_SecondaryButtonClick"
+    Background="#1e1e1e"
+   >
+
+    <ScrollViewer>
+        <StackPanel>
+            <TextBox x:Name="Firstname" IsEnabled="True" Header= "Prénom *" Margin="24,24,24,0" MaxLength="64" Width="450" HorizontalAlignment="Left"/>
+            <TextBox x:Name="Lastname" IsEnabled="True" Header= "Nom *" Margin="24,24,24,0" MaxLength="64" Width="450" HorizontalAlignment="Left"/>
+            <TextBox x:Name="Phone" IsEnabled="True" Header= "Téléphone" Margin="24,24,24,0" MaxLength="64" Width="450" HorizontalAlignment="Left"/>
+            <TextBox x:Name="Email" IsEnabled="True" Header= "Email" Margin="24,24,24,0" MaxLength="64" Width="450" HorizontalAlignment="Left"/>
+        </StackPanel>
+    </ScrollViewer>
+</ContentDialog>

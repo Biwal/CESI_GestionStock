@@ -1,0 +1,11 @@
+/bin
+.vs/
+/.vs
+/Migrations
+obj/
+/appsettings.Development.json
+LastProject.sln
+LastProject.csproj.user
+LastProject.csproj
+packages/
+bin/

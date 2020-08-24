@@ -1,0 +1,79 @@
+﻿<ContentDialog
+    x:Class="Negosud.Views.Product.EditProductDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Negosud.Views.Product"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:fa="using:FontAwesome.UWP"
+    xmlns:converters="using:Negosud.Converters"
+    Title="Ajouter une référence"
+    PrimaryButtonText="Valider"
+    SecondaryButtonText="Annuler"
+    PrimaryButtonCommand="{Binding AddProductCommand}"
+    Background="#1e1e1e"
+    x:Name="AddProductContentDialog">
+    <ContentDialog.Resources>
+        <converters:ByteToImageSourceConverter x:Key="ByteToImageSourceConverter"/>
+    </ContentDialog.Resources>
+    <ScrollViewer>
+        <StackPanel>
+            <TextBox x:Name="Name" Text="{Binding Path=Product.Name, Mode=TwoWay}" IsEnabled="True" Header= "Nom *" Margin="24,24,24,0" MaxLength="64" Width="450" HorizontalAlignment="Left" InputScope="PersonalFullName"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <TextBox x:Name="Price" Header= "Prix *" Text="{Binding Path=Product.Price, Mode=TwoWay}" Margin="24,24,24,0" MaxLength="64" Width="200" HorizontalAlignment="Left" BeforeTextChanging="Double_OnBeforeTextChanging"/>
+                    <Grid Margin="24,24,24,0">
+                        <Grid.ColumnDefinitions >
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0"  HorizontalAlignment="Left" VerticalAlignment="Center">Famille</TextBlock>
+                        <Button Command="{Binding AddFamilyCommand}" CommandParameter="{Binding ElementName=AddProductContentDialog}" Grid.Column="1" Content="Ajouter" HorizontalAlignment="Right" Style="{StaticResource PrimaryButton}"></Button>
+                    </Grid>
+                    <ComboBox  
+                        x:Name="Family"
+                         ItemsSource="{Binding Families}"
+                         SelectedItem="{Binding Path=Product.Family, Mode=TwoWay}"
+                         PlaceholderText="Famille"
+                         Margin="24,5,24,0"
+                         Width="200">
+                    </ComboBox>
+
+                    <Grid Margin="24,24,24,0">
+                        <Grid.ColumnDefinitions >
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0"  HorizontalAlignment="Left" VerticalAlignment="Center">Fournisseur</TextBlock>
+                        <Button Grid.Column="1" Command="{Binding AddProviderCommand}" CommandParameter="{Binding ElementName=AddProductContentDialog}" HorizontalAlignment="Right" Content="Ajouter" Style="{StaticResource PrimaryButton}" VerticalAlignment="Top"></Button>
+                    </Grid>
+                    <ComboBox  
+                        x:Name="Provider"
+                        ItemsSource="{Binding Providers}"
+                        PlaceholderText="Fournisseur"
+                        SelectedItem="{Binding Path=Product.Provider, Mode=TwoWay}"
+                        Margin="24,5,24,0"
+                        Width="200"
+                        DisplayMemberPath="FullName">
+                    </ComboBox>
+
+                    <TextBox x:Name="Quantity" Header= "Stock" Text="{Binding Path=Product.Quantity, Mode=TwoWay}" Margin="24,24,24,0" MaxLength="32" Width="200" HorizontalAlignment="Left" BeforeTextChanging="Integer_OnBeforeTextChanging"/>
+                    <TextBox x:Name="PackedQuantity" Header= "Nombre dans un pack à l'achat" Text="{Binding Path=Product.PackedQuantity, Mode=TwoWay}" Margin="24,24,24,0" MaxLength="32" Width="200" HorizontalAlignment="Left" BeforeTextChanging="Integer_OnBeforeTextChanging"/>
+                    <TextBox x:Name="PackedPrice" Header= "Prix du pack à l'achat" Text="{Binding Path=Product.PackedPrice, Mode=TwoWay}" Margin="24,24,24,0" MaxLength="32" Width="200" HorizontalAlignment="Left" BeforeTextChanging="Integer_OnBeforeTextChanging"/>
+                    <TextBlock Margin="24,24,24,0" HorizontalAlignment="Left">Amplitude du stock</TextBlock>
+                    <controls:RangeSelector x:Name="StockAvailable" ValueChanged="rangeSelectorValueChanged" Margin="24,5,24,0" Minimum="0" Maximum="200" StepFrequency="6"></controls:RangeSelector>
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <Button Height="30" Width="150" Background="LightGray" Content="Ajouter une image" HorizontalAlignment="Center" Margin="0,24" Command="{Binding AddPhotoCommand}"/>
+                    <Image x:Name="image1" Width="Auto" Height="Auto" MaxHeight="200" Source="{Binding Result}" DataContext="{Binding Path=Product.Image, Converter={StaticResource ByteToImageSourceConverter}}" />
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+    </ScrollViewer>
+</ContentDialog>
